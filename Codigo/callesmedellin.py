@@ -68,7 +68,9 @@ def interfacita():
                 color = 'blue'
                 hi = False
             elif tipo1 == 5:
+                print("El mapa de calor es demoradito, en un momento se abrirá. :D")
                 calorcito()
+                hi = False
             else:
                 print("La opcion digitada no está entre las opciones.")
                 print("->DIGITE NUEVAMENTE<-")
@@ -89,8 +91,8 @@ def interfacita():
                 print("3. Universidad de Antioquia.")
                 print("4. Universidad Luis Amigo.")
                 print("5. Universidad de Medellín.")
-                print("6. Casa estudiante 2.")
-                print("7. Casa estudiante 3.")
+                print("6. Casa estudiante 1.")
+                print("7. Casa estudiante 2.")
                 hola = True
                 while hola == True:
                     seleccion1 = int(input())
@@ -107,8 +109,8 @@ def interfacita():
                 print("3. Universidad de Antioquia.")
                 print("4. Universidad Luis Amigo.")
                 print("5. Universidad de Medellín.")
-                print("6. Casa estudiante 2.")
-                print("7. Casa estudiante 3.")
+                print("6. Casa estudiante 1.")
+                print("7. Casa estudiante 2.")
                 hola2 = True
                 while hola2 == True:
                     seleccion2 = int(input())
