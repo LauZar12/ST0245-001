@@ -10,6 +10,9 @@ def calorcito():
     mapa_calor = fl.Map(location=[6.252, -75.57], zoom_start = 13)
     HM(list(zip(la, lo, df['harassmentRisk'])), min_opacity=0.1, radius=25, blur=25, max_zoom=1).add_to(mapa_calor)
     mapa_calor.save(os.path.join('SEEHEATMAPHARASSMENT.html')); wb.open_new_tab('SEEHEATMAPHARASSMENT.html')
+    ##Timer para medir la ejecucíon del programa
+    fin = time.time()
+    print("Tiempo de ejecución:  " + str(fin-inicio)) 
 ##Cambios en el csv fastidiosito este con los NaN y eso.
 def fastidiosocsv():
     df = pd.read_csv("calles_de_medellin_con_acoso.csv", sep=';')
@@ -87,7 +90,7 @@ def interfacita():
                 print("Digíte las coordenadas de llegada: ")
                 llegada = input()
                 bruh = False
-            if opcion1 == 2:
+            elif opcion1 == 2:
                 print("       ->LUGAR DE PARTIDA:   ")
                 print("1. Universidad EAFIT.")
                 print("2. Universidad Nacional.")
@@ -124,7 +127,7 @@ def interfacita():
                         print("La opcion digitada no está entre las opciones.")
                         print("->DIGITE NUEVAMENTE<-")
                 bruh = False
-            if opcion1 not in [1,2]:
+            else:
                 print("La opcion digitada no está entre las opciones.")
                 print("->DIGITE NUEVAMENTE<-")
             
@@ -143,7 +146,7 @@ def interfacita():
                     partida = "(-75.6101004, 6.2312125)"
                 elif seleccion1 == 6:
                     partida = "(-75.6107506, 6.2444087)"
-                elif seleccion1 ==7:
+                else:
                     partida = "(-75.583682, 6.2892842)"
                 ##Coordenadas de llegada.
                 if seleccion2 == 1:
@@ -158,7 +161,7 @@ def interfacita():
                     llegada = "(-75.6101004, 6.2312125)"
                 elif seleccion2 == 6:
                     llegada = "(-75.6107506, 6.2444087)"
-                elif seleccion2 == 7:
+                else:
                     llegada = "(-75.583682, 6.2892842)"
         ##Creación de los mapitas
         mapitacorto = nx.from_pandas_edgelist(df,'origin','destination',tipo2)
@@ -213,10 +216,13 @@ def interfacita():
             html2.save(os.path.join("SEEMAPHARASSMENT.html"))
             wb.open_new_tab("SEEMAPSHORT.html")
             wb.open_new_tab("SEEMAPHARASSMENT.html")
-        elif tipo1 == 4:
+        else:
             print("La distancia a recorrer en el camino mas corto elevado al acoso es de: "+str(int(long3))+" metros")
             html3.save(os.path.join("SEEMAPPOWERBOTH.html"))
             wb.open_new_tab("SEEMAPPOWERBOTH.html")
+        ##Timer para medir la ejecucíon del programa
+        fin = time.time()
+        print("Tiempo de ejecución:  " + str(fin-inicio)) 
         ##Determinar si el usuario quiere seguir ejecutando o finalizar la ejecución.
         print("")
         print("¿Desea seleccionar una opcion nuevamente o cerrar el programa?")
@@ -237,6 +243,3 @@ def interfacita():
 
 ##Se sabe pa' que es esto xd
 interfacita()
-#Timer para medir la ejecución del programa
-fin = time.time()
-print("Tiempo de ejecución:  " + str(fin-inicio)) 
