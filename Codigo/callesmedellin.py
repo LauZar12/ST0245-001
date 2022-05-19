@@ -78,11 +78,10 @@ def interfacita():
                 print("El mapa de calor es demoradito, en un momento se abrirá. :D")
                 calorcito()
                 hi = False
+                break
             else:
                 print("La opcion digitada no está entre las opciones.")
                 print("->DIGITE NUEVAMENTE<-")
-        if tipo1 == 5:
-            break
         bruh = True
         while bruh == True:
             opcion1 = int(input())
@@ -227,6 +226,7 @@ def interfacita():
         fin = time.time()
         print("Tiempo de ejecución:  " + str(fin-inicio)) 
         ##Determinar si el usuario quiere seguir ejecutando o finalizar la ejecución.
+        ##Tener en cuenta que si se decide seguir utilizando el programa sin finalizar la ejecución el tiempo del programa no será el real ya que se seguirá contando mientras se realizan todas las interacciones
         print("")
         print("¿Desea seleccionar una opcion nuevamente o cerrar el programa?")
         print("1. Iniciar de nuevo en el menú principal.")
