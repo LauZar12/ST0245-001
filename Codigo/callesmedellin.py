@@ -1,5 +1,6 @@
 #Para poder inicializar el programa debes instalar en cmd con pip el networkx, el pandas y el folium.
 import os, folium as fl, webbrowser as wb, networkx as nx, pandas as pd, time
+from pickle import TRUE
 from folium.plugins import HeatMap as HM
 #Empieza a contar el tiempo de ejecución
 inicio = time.time()
@@ -38,7 +39,7 @@ def interfacita():
         print("2. Buscar camino con menos acoso.")
         print("3. Buscar los dos caminos (el mas corto y el que tenga menos acoso).")
         print("4. Buscar un camino que tome en cuenta el acoso y la distancia (distancia elevada por acoso).")
-        print("5. Ver el mapa de calor de acuerdo al acoso en Medellín.")
+        print("5. Ver el mapa de calor de acuerdo al acoso en Medellín (Finalizar programa.)")
         hi = True
         while hi  == True:
             tipo1 = int(input())
@@ -82,6 +83,7 @@ def interfacita():
                 print("->DIGITE NUEVAMENTE<-")
         if tipo1 == 5:
             break
+        bruh = True
         while bruh == True:
             opcion1 = int(input())
             ##Revisión de que la opcion digitada este en el menú de opciones.
