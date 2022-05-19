@@ -73,14 +73,15 @@ def interfacita():
                 tipo4 = 'lengthpowerharassmentRisk'
                 color = 'blue'
                 hi = False
-            elif tipo1 == 5:
+            elif tipo1 == 5: ##Finaliza ejecución del programa
                 print("El mapa de calor es demoradito, en un momento se abrirá. :D")
                 calorcito()
                 hi = False
             else:
                 print("La opcion digitada no está entre las opciones.")
                 print("->DIGITE NUEVAMENTE<-")
-        bruh = True
+        if tipo1 == 5:
+            break
         while bruh == True:
             opcion1 = int(input())
             ##Revisión de que la opcion digitada este en el menú de opciones.
