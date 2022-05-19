@@ -1,5 +1,8 @@
-import os, folium as fl, webbrowser as wb, networkx as nx, pandas as pd
+#Para poder inicializar el programa debes instalar en cmd con pip el networkx, el pandas y el folium.
+import os, folium as fl, webbrowser as wb, networkx as nx, pandas as pd, time
 from folium.plugins import HeatMap as HM
+#Empieza a contar el tiempo de ejecución
+inicio = time.time()
 ##Hacer el mapa de calor de acuerdo a el acoso en las calles de Medellín.
 def calorcito():
     df = pd.read_csv("calles_de_medellin_con_acoso.csv", sep=';')
@@ -234,3 +237,6 @@ def interfacita():
 
 ##Se sabe pa' que es esto xd
 interfacita()
+#Timer para medir la ejecución del programa
+fin = time.time()
+print("Tiempo de ejecución:  " + str(fin-inicio)) 
