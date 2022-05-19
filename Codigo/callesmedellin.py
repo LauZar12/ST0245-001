@@ -1,31 +1,32 @@
 import os, folium as fl, webbrowser as wb, networkx as nx, pandas as pd
 from folium.plugins import HeatMap as HM
-##d
+##Hacer el mapa de calor de acuerdo a el acoso en las calles de Medellín.
 def calorcito():
     df = pd.read_csv("calles_de_medellin_con_acoso.csv", sep=';')
     lo,la = [eval(calle)[0] for calle in df["origin"]],[eval(coord)[1] for coord in df["origin"]]
     mapa_calor = fl.Map(location=[6.252, -75.57], zoom_start = 13)
     HM(list(zip(la, lo, df['harassmentRisk'])), min_opacity=0.1, radius=25, blur=25, max_zoom=1).add_to(mapa_calor)
     mapa_calor.save(os.path.join('SEEHEATMAPHARASSMENT.html')); wb.open_new_tab('SEEHEATMAPHARASSMENT.html')
-##
+##Cambios en el csv fastidiosito este con los NaN y eso.
 def fastidiosocsv():
     df = pd.read_csv("calles_de_medellin_con_acoso.csv", sep=';')
-    df["lengthpowerharassmentRisk"] = df["length"]**df["harassmentRisk"]
+    df["lengthpowerharassmentRisk"] = df["length"]**df["harassmentRisk"]##Nueva columna con la distancia mas corta elevada al acoso.
     suma = df['harassmentRisk'].sum()
     contadorcito = 52658
-    promedio = suma/contadorcito
-    df["harassmentRisk"] = df["harassmentRisk"].fillna(value = promedio)
+    promedio = suma/contadorcito ##Promedio para los NaN
+    df["harassmentRisk"] = df["harassmentRisk"].fillna(value = promedio) 
     df.to_csv("calles_de_medellin_con_acoso.csv",sep=';',index=False)
 fastidiosocsv()
-##
+##Interfaz: opciones, excepciones, ciclos y flujo del código en general.
 def interfacita():
     df = pd.read_csv("calles_de_medellin_con_acoso.csv", sep=';')
-    df.head()
+    df.head() ##Ordenamiento de los datos con pandas. :D
     tipo3,tipo4,tipo2,djk_path3 = True,True,True,True
     color = ""
     color2 = ""
     continuar = True
-    while continuar == True:
+    ##Ciclo para determinar cuantas veces quiere el usuario ejecutar el código.
+    while continuar == True: 
         print("                        ||~~**MENU DE OPCIONES**~~||                  ")
         print("1. Buscar camino mas corto.")
         print("2. Buscar camino con menos acoso.")
@@ -35,7 +36,7 @@ def interfacita():
         hi = True
         while hi  == True:
             tipo1 = int(input())
-            ##Revisión de que la opcion digitada este en el menú de opciones
+            ##Revisión de que la opcion digitada este en el menú de opciones.
             if tipo1 == 1:
                 print("                    |~*¿QUÉ DESEA HACER?*~|                    ")
                 print("1. Buscar el camino mas corto ingresando coordenadas.")
@@ -74,7 +75,7 @@ def interfacita():
         bruh = True
         while bruh == True:
             opcion1 = int(input())
-            ##Revisión de que la opcion digitada este en el menú de opciones
+            ##Revisión de que la opcion digitada este en el menú de opciones.
             if opcion1 == 1:
                 print("Digite las coordenadas de inicio: ")
                 partida = input()
@@ -93,7 +94,7 @@ def interfacita():
                 hola = True
                 while hola == True:
                     seleccion1 = int(input())
-                    ##Revisión de que la opcion digitada este en el menú de opciones
+                    ##Revisión de que la opcion digitada este en el menú de opciones.
                     if seleccion1 in [1,2,3,4,5,6,7]:
                         hola = False
                     else:
@@ -111,7 +112,7 @@ def interfacita():
                 hola2 = True
                 while hola2 == True:
                     seleccion2 = int(input())
-                    ##Revisión de que la opcion digitada este en el menú de opciones
+                    ##Revisión de que la opcion digitada este en el menú de opciones.
                     if seleccion2 in [1,2,3,4,5,6,7]:
                         hola2 = False
                     if seleccion2 not in [1,2,3,4,5,6,7]:
@@ -124,7 +125,7 @@ def interfacita():
             
             ##Definicion de coordenadas de lugar de partida y lugar de llegada según las opciones predeterminadas.
             if opcion1 == 2:
-                ##Coordenadas de salida
+                ##Coordenadas de salida.
                 if seleccion1 == 1:
                     partida = "(-75.5778046, 6.2029412)"
                 elif seleccion1 == 2:
@@ -139,7 +140,7 @@ def interfacita():
                     partida = "(-75.6107506, 6.2444087)"
                 elif seleccion1 ==7:
                     partida = "(-75.583682, 6.2892842)"
-                ##Coordenadas de llegada
+                ##Coordenadas de llegada.
                 if seleccion2 == 1:
                     llegada = "(-75.5778046, 6.2029412)"
                 elif seleccion2 == 2:
@@ -171,7 +172,7 @@ def interfacita():
             print("Se actualizó el archivo csv, por favor vuelva a digitar las opciones que busca.")
             fastidiosocsv()
             interfacita()
-        ##Manejo de Strings
+        ##Manejo de Strings para cambiar de posición las coordenadas y que el Folium funcione.
         for i in range(len(djk_path1)):
             djk_path1[i] = eval(djk_path1[i])[::-1]
         for i in range(len(djk_path2)):
@@ -182,16 +183,16 @@ def interfacita():
         html1 = fl.Map(location = djk_path1[0],zoom_start = 13)
         html2 = fl.Map(location = djk_path2[0],zoom_start = 13)
         html3 = fl.Map(location = djk_path3[0],zoom_start = 13)
-        ##Poner rayitas para indicar el camino
+        ##Poner rayitas para indicar el camino en los mapitas
         rayita1 = fl.PolyLine(djk_path1,color = color,weight = 5).add_to(html1)
         rayita2 = fl.PolyLine(djk_path2,color = color2,weigth = 5).add_to(html2)
         rayita3 = fl.PolyLine(djk_path3,color = color, weigth = 5).add_to(html3)
-        #ver distancia en metros
+        #Ver distancia en metros de los caminos dados.
         long = nx.dijkstra_path_length(mapitacorto,partida,llegada,tipo2)
         long2 = nx.dijkstra_path_length(mapitacoso,partida,llegada,tipo3)
         long2 = long2/len(djk_path2)
         long3 = nx.dijkstra_path_length(mapitaelevado,partida,llegada,tipo4)
-        ##Guardar los html y abrirlos dependiendo de que pidió el usuario
+        ##Guardar los html y abrirlos dependiendo de que pidió el usuario.
         if tipo1 == 1:
             print("La distancia a recorrer es de: "+str(int(long))+" metros")
             html1.save(os.path.join("SEEMAPSHORT.html"))
@@ -211,6 +212,7 @@ def interfacita():
             print("La distancia a recorrer en el camino mas corto elevado al acoso es de: "+str(int(long3))+" metros")
             html3.save(os.path.join("SEEMAPPOWERBOTH.html"))
             wb.open_new_tab("SEEMAPPOWERBOTH.html")
+        ##Determinar si el usuario quiere seguir ejecutando o finalizar la ejecución.
         print("")
         print("¿Desea seleccionar una opcion nuevamente o cerrar el programa?")
         print("1. Iniciar de nuevo en el menú principal.")
